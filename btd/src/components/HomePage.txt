@@ -1,0 +1,163 @@
+import React from 'react';
+import { Brain, Stethoscope, User, Zap, Shield, FileText } from 'lucide-react';
+
+interface HomePageProps {
+  onGuestAccess: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onGuestAccess }) => {
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex flex-col">
+
+      {/* Header - identical to your app */}
+      <header className="bg-white dark:bg-gray-800 shadow-sm transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Brain className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">NeuroScan AI</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Brain Tumor Detection System</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-sm text-gray-500 dark:text-gray-400">System Online</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main */}
+      <main className="flex-1 flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-3xl">
+
+          {/* Title */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              AI-Powered Brain Tumor Detection
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Choose how you want to access the system
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
+            {/* Doctor */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 transition-colors duration-200">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mb-4">
+                <Stethoscope className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Doctor Portal</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                Secure login for medical professionals. Store patient scans, track analysis history and manage medical reports.
+              </p>
+              <div className="space-y-2 mb-6">
+                {['Patient data storage', 'Analysis history', 'Secure records'].map((f) => (
+                  <div key={f} className="flex items-center space-x-2">
+                    <div className="w-4 h-4 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0">
+                      <span className="text-blue-600 dark:text-blue-400 text-xs">✓</span>
+                    </div>
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{f}</span>
+                  </div>
+                ))}
+              </div>
+              {/*
+                TO ENABLE CLERK LOGIN:
+                1. Run: npm install @clerk/clerk-react
+                2. Sign up at clerk.com and get your publishable key
+                3. In main.tsx wrap your app:
+                   <ClerkProvider publishableKey="your_key">
+                     <App />
+                   </ClerkProvider>
+                4. Replace this button with:
+                   import { SignInButton } from '@clerk/clerk-react';
+                   <SignInButton mode="modal">
+                     <button className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200">
+                       <Shield className="h-4 w-4 mr-2" /> Sign In
+                     </button>
+                   </SignInButton>
+              */}
+              <button
+                onClick={() => alert('Install Clerk:\nnpm install @clerk/clerk-react\n\nThen get your key from clerk.com')}
+                className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+              >
+                <Shield className="h-4 w-4 mr-2" />
+                Sign In — Doctor Access
+              </button>
+            </div>
+
+            {/* Guest */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 transition-colors duration-200">
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mb-4">
+                <User className="h-6 w-6 text-green-600 dark:text-green-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Quick Analysis</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                Analyze your brain MRI scan instantly without an account. Get real-time AI results with no registration required.
+              </p>
+              <div className="space-y-2 mb-6">
+                {['No account required', 'Instant AI analysis', 'Download report'].map((f) => (
+                  <div key={f} className="flex items-center space-x-2">
+                    <div className="w-4 h-4 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center flex-shrink-0">
+                      <span className="text-green-600 dark:text-green-400 text-xs">✓</span>
+                    </div>
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{f}</span>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={onGuestAccess}
+                className="w-full flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200"
+              >
+                <Zap className="h-4 w-4 mr-2" />
+                Analyze Scan Now
+              </button>
+            </div>
+
+          </div>
+
+          {/* Stats */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-5 transition-colors duration-200">
+            <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700 text-center">
+              {[
+                { value: '88%', label: 'Model Accuracy' },
+                { value: '4', label: 'Tumor Classes' },
+                { value: '5600+', label: 'Training Images' },
+              ].map((s) => (
+                <div key={s.label} className="px-4">
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{s.value}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center space-x-2">
+              <Brain className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-lg font-medium text-gray-700 dark:text-gray-300" >NeuroScan AI</span>
+              <span className="text-gray-300 dark:text-gray-600">·</span>
+              {/* <span className="text-sm text-gray-500 dark:text-gray-400">College Project 2026</span> */}
+            </div>
+            <div className="flex items-center space-x-1 text-xs text-gray-400 dark:text-gray-500">
+              {/* <FileText className="h-3 w-3" /> */}
+              <span>@ 2026 All Rights Reserved</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
+
+export default HomePage;

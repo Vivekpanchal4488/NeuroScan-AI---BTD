@@ -1,0 +1,124 @@
+import { DetectionResult } from '../types';
+
+// Simulate AI processing with mock data
+export const simulateProcessing = async (
+  file: File,
+  onProgress: (progress: number, stage: string) => void
+): Promise<DetectionResult> => {
+  const stages = [
+    { progress: 25, stage: "Preprocessing scan", delay: 800 },
+    { progress: 50, stage: "AI analysis in progress", delay: 1200 },
+    { progress: 75, stage: "Detecting abnormalities", delay: 1000 },
+    { progress: 100, stage: "Generating results", delay: 600 }
+  ];
+
+  for (const stage of stages) {
+    await new Promise(resolve => setTimeout(resolve, stage.delay));
+    onProgress(stage.progress, stage.stage);
+  }
+
+  // Simulate random tumor detection (70% chance of no tumor for demo)
+  const hasTumor = Math.random() > 0.7;
+  const confidence = Math.floor(Math.random() * 15) + 85; // 85-99%
+  const tumorArea = hasTumor ? Math.floor(Math.random() * 500) + 100 : 0;
+
+  // Create a mock processed image (overlay detection highlights)
+  const processedImage = await createProcessedImage(file, hasTumor);
+
+  return {
+    hasTumor,
+    confidence,
+    tumorArea,
+    processedImage,
+    tumorRegions: hasTumor ? [
+      {
+        x: Math.floor(Math.random() * 200) + 50,
+        y: Math.floor(Math.random() * 200) + 50,
+        width: Math.floor(Math.random() * 100) + 50,
+        height: Math.floor(Math.random() * 100) + 50
+      }
+    ] : []
+  };
+};
+
+const createProcessedImage = async (file: File, hasTumor: boolean): Promise<string> => {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+    const img = new Image();
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      
+      // Draw original image
+      ctx.drawImage(img, 0, 0);
+      
+      if (hasTumor) {
+        // Add red overlay to simulate tumor detection
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = '#ef4444';
+        
+        // Random tumor locations
+        const numRegions = Math.floor(Math.random() * 3) + 1;
+        for (let i = 0; i < numRegions; i++) {
+          const x = Math.random() * (canvas.width - 100);
+          const y = Math.random() * (canvas.height - 100);
+          const width = Math.random() * 80 + 40;
+          const height = Math.random() * 80 + 40;
+          
+          ctx.fillRect(x, y, width, height);
+        }
+        
+        // Add border highlights
+        ctx.globalAlpha = 0.8;
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 3;
+        
+        for (let i = 0; i < numRegions; i++) {
+          const x = Math.random() * (canvas.width - 100);
+          const y = Math.random() * (canvas.height - 100);
+          const width = Math.random() * 80 + 40;
+          const height = Math.random() * 80 + 40;
+          
+          ctx.strokeRect(x, y, width, height);
+        }
+      }
+      
+      resolve(canvas.toDataURL('image/png'));
+    };
+
+    img.src = URL.createObjectURL(file);
+  });
+};
+
+export const downloadReport = (
+  fileName: string,
+  detectionResult: DetectionResult,
+  originalFile: any
+) => {
+  const reportData = {
+    timestamp: new Date().toISOString(),
+    fileName: originalFile.file.name,
+    fileSize: originalFile.file.size,
+    detectionResult,
+    analysis: {
+      hasTumor: detectionResult.hasTumor,
+      confidence: detectionResult.confidence,
+      tumorArea: detectionResult.tumorArea,
+      recommendation: detectionResult.hasTumor 
+        ? "Consult with a healthcare professional for further evaluation"
+        : "Continue regular screening as recommended by your healthcare provider"
+    }
+  };
+
+  const dataStr = JSON.stringify(reportData, null, 2);
+  const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+  
+  const exportFileDefaultName = `brain-scan-report-${new Date().toISOString().split('T')[0]}.json`;
+  
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+};

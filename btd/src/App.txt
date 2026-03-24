@@ -1,0 +1,189 @@
+// Wake up API on page load
+fetch('https://brain-tumor-api-m3x7.onrender.com/')
+  .then(() => console.log('API warmed up!'))
+  .catch(() => console.log('API warming up...'));
+
+import HomePage from './components/HomePage';
+import React, { useEffect, useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
+import Header from './components/Header';
+import FileUpload from './components/FileUpload';
+import ProcessingIndicator from './components/ProcessingIndicator';
+import ImageComparison from './components/ImageComparison';
+import Results from './components/Results';
+import { UploadedFile, DetectionResult, ProcessingState } from './types';
+import { simulateProcessing, downloadReport } from './utils/mockProcessing';
+
+// Wake up API when page loads
+fetch('https://brain-tumor-api-m3x7.onrender.com/').catch(() => {});
+
+
+function App() {
+   const [showHome, setShowHome] = useState(true);
+  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [processingState, setProcessingState] = useState<ProcessingState>({
+    isProcessing: false,
+    progress: 0,
+    stage: ''
+  });
+  const [detectionResult, setDetectionResult] = useState<DetectionResult | null>(null);
+
+  const handleFileUpload = async (file: UploadedFile) => {
+    if (!file) {
+      setUploadedFile(null);
+      setDetectionResult(null);
+      setProcessingState({ isProcessing: false, progress: 0, stage: '' });
+      return;
+    }
+
+    setUploadedFile(file);
+    setDetectionResult(null);
+    setProcessingState({ isProcessing: true, progress: 0, stage: 'Initializing...' });
+
+    try {
+      const result = await simulateProcessing(
+        file.file,
+        (progress, stage) => {
+          setProcessingState({ isProcessing: true, progress, stage });
+        }
+      );
+      
+      setDetectionResult(result);
+      setProcessingState({ isProcessing: false, progress: 100, stage: 'Complete' });
+    } catch (error) {
+      console.error('Processing failed:', error);
+      setProcessingState({ isProcessing: false, progress: 0, stage: 'Error' });
+    }
+  };
+
+  const handleDownload = () => {
+    if (uploadedFile && detectionResult) {
+      downloadReport('brain-scan-report', detectionResult, uploadedFile);
+    }
+  };
+
+  const resetAnalysis = () => {
+    setUploadedFile(null);
+    setDetectionResult(null);
+    setProcessingState({ isProcessing: false, progress: 0, stage: '' });
+  };
+
+
+  // Keep API awake - ping every 10 minutes
+useEffect(() => {
+  const keepAwake = setInterval(() => {
+    fetch('https://brain-tumor-api-m3x7.onrender.com/')
+      .catch(() => {});
+  }, 600000); // 10 minutes
+  return () => clearInterval(keepAwake);
+}, []);
+
+
+   if (showHome) {                           
+    return <HomePage onGuestAccess={() => setShowHome(false)} />;
+  }                                              
+
+
+
+  return (
+    
+    <ThemeProvider>
+      
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+        <Header />
+        
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 mt-5">
+              AI-Powered Brain Tumor Detection
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Upload your brain scan for advanced AI analysis and tumor detection
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-8">
+            <div className="space-y-6">
+              <FileUpload
+                onFileUpload={handleFileUpload}
+                uploadedFile={uploadedFile}
+                isProcessing={processingState.isProcessing}
+              />
+              
+              <ProcessingIndicator processingState={processingState} />
+              
+              {detectionResult && uploadedFile && (
+                <Results
+                  detectionResult={detectionResult}
+                  originalFile={uploadedFile}
+                  onDownload={handleDownload}
+                />
+              )}
+            </div>
+
+            <div className="space-y-6">
+              {detectionResult && uploadedFile && (
+                <ImageComparison
+                  originalFile={uploadedFile}
+                  detectionResult={detectionResult}
+                />
+              )}
+              
+              {!uploadedFile && (
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mt-5 text-center transition-colors duration-200">
+                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    How it works
+                  </h3>
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-blue-600 dark:text-blue-400">1</span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Upload your brain scan image (MRI, CT, or X-ray)
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-blue-600 dark:text-blue-400">2</span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Our AI analyzes the scan for potential abnormalities
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-bold text-blue-600 dark:text-blue-400">3</span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Get detailed results with confidence levels and tumor area measurements
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {detectionResult && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={resetAnalysis}
+                className="px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg transition-colors duration-200"
+              >
+                Analyze Another Scan
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export default App;
