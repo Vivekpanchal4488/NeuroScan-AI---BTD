@@ -104,9 +104,9 @@ function App() {
       <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Manrope', sans-serif", background: '#f9f9f5' }}>
 
         {/* ANNOUNCEMENT BAR */}
-        <div className="text-center py-2 px-3 text-xs" style={{ background: '#0d0d0d', color: '#c8f04e', letterSpacing: '0.04em' }}>
+        {/* <div className="text-center py-2 px-3 text-xs" style={{ background: '#0d0d0d', color: '#c8f04e', letterSpacing: '0.04em' }}>
           NeuroScan AI — For informational purposes only. Always consult a qualified physician.
-        </div>
+        </div> */}
 
         {/* HEADER */}
         <header className="flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4 border-b sticky top-0 z-50" style={{ background: '#f9f9f5', borderColor: '#e0e0d8' }}>

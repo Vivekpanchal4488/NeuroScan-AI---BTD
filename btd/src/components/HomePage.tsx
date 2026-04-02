@@ -32,12 +32,12 @@ const HomePage: React.FC<HomePageProps> = ({ onGuestAccess, onDoctorAccess }) =>
       style={{ fontFamily: "'Manrope', sans-serif", background: '#f9f9f5', color: '#0d0d0d' }}
     >
       {/* ── ANNOUNCEMENT BAR ── */}
-      <div
+      {/* <div
         className="text-center py-2 px-3 text-xs leading-relaxed"
         style={{ background: '#0d0d0d', color: '#c8f04e', letterSpacing: '0.03em' }}
       >
         NeuroScan AI — For informational purposes only. Always consult a qualified physician.
-      </div>
+      </div> */}
 
       {/* ── HEADER ── */}
       <header
