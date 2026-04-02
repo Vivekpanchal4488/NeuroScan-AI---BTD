@@ -166,7 +166,7 @@ const DoctorScanPage: React.FC<DoctorScanPageProps> = ({ onHome }) => {
 
         <div className="mb-6 sm:mb-8">
           <p className="text-xs font-semibold uppercase mb-2" style={{ color: '#888', letterSpacing: '0.12em' }}>Doctor Portal</p>
-          <h2 className="font-extrabold mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(22px, 3vw, 42px)', letterSpacing: '-0.02em', color: '#0d0d0d' }}>
+          <h2 className="font-extrabold mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(28px, 2vw, 42px)', letterSpacing: '-0.02em', color: '#0d0d0d' }}>
             AI-Powered{' '}
             <span className="relative inline-block">
               Brain Tumor Detection
@@ -397,7 +397,7 @@ const DoctorScanPage: React.FC<DoctorScanPageProps> = ({ onHome }) => {
       {/* FOOTER */}
       <footer className="flex items-center justify-between px-4 sm:px-10 py-4 sm:py-5 border-t mt-4 sm:mt-8" style={{ borderColor: '#e0e0d8', background: '#f9f9f5' }}>
         <div className="flex items-center gap-2 font-bold text-sm sm:text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-          <Brain className="h-4 w-4" /> NeuroScan AI
+          <Brain className="h-4 w-4" /> NeuroScan AI — Doctor Portal
         </div>
         <div className="text-xs" style={{ color: '#888' }}>© 2026 All Rights Reserved</div>
       </footer>

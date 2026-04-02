@@ -121,7 +121,7 @@ const HomePage: React.FC<HomePageProps> = ({ onGuestAccess, onDoctorAccess }) =>
       )}
 
       {/* ── MAIN ── */}
-      <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-16">
+      <main className="flex-1 flex items-center justify-center px-4 py-8 pt-4 ">
         <div className="w-full max-w-3xl">
 
           {/* ── TITLE ── */}

@@ -144,7 +144,7 @@ function App() {
 
           <div className="mb-6 sm:mb-10">
             <p className="text-xs font-semibold uppercase mb-2" style={{ color: '#888', letterSpacing: '0.12em' }}>Quick Analysis</p>
-            <h2 className="font-extrabold mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(22px, 3vw, 42px)', letterSpacing: '-0.02em', color: '#0d0d0d' }}>
+            <h2 className="font-extrabold mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(28px, 2vw, 42px)', letterSpacing: '-0.02em', color: '#0d0d0d' }}>
               AI-Powered Brain{' '}
               <span className="relative inline-block">
                 Tumor Detection
