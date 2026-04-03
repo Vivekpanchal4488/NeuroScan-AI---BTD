@@ -51,7 +51,7 @@ const HomePage: React.FC<HomePageProps> = ({ onGuestAccess, onDoctorAccess }) =>
           </div>
           <div>
             <div className="text-lg sm:text-2xl font-extrabold leading-tight" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-              NeuroScan AI
+              TumorTrace
             </div>
             <div className="text-xs hidden sm:block" style={{ color: '#888' }}>Brain Tumor Detection System</div>
           </div>
@@ -248,7 +248,7 @@ const HomePage: React.FC<HomePageProps> = ({ onGuestAccess, onDoctorAccess }) =>
         style={{ borderColor: '#e0e0d8', background: '#f9f9f5' }}
       >
         <div className="flex items-center gap-2 font-bold text-sm sm:text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-          <Brain className="h-4 w-4" /> NeuroScan AI
+          <Brain className="h-4 w-4" /> TumorTrace
         </div>
         <div className="text-xs" style={{ color: '#888' }}>© 2026 All Rights Reserved</div>
       </footer>

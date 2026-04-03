@@ -121,7 +121,7 @@ const DoctorScanPage: React.FC<DoctorScanPageProps> = ({ onHome }) => {
           </div>
           <div>
             <div className="text-lg sm:text-2xl font-extrabold leading-tight" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-              NeuroScan AI
+              TumorTrace
             </div>
             <div className="text-xs hidden sm:block" style={{ color: '#888' }}>Doctor Portal</div>
           </div>
@@ -397,7 +397,7 @@ const DoctorScanPage: React.FC<DoctorScanPageProps> = ({ onHome }) => {
       {/* FOOTER */}
       <footer className="flex items-center justify-between px-4 sm:px-10 py-4 sm:py-5 border-t mt-4 sm:mt-8" style={{ borderColor: '#e0e0d8', background: '#f9f9f5' }}>
         <div className="flex items-center gap-2 font-bold text-sm sm:text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-          <Brain className="h-4 w-4" /> NeuroScan AI — Doctor Portal
+          <Brain className="h-4 w-4" /> TumorTrace — Doctor Portal
         </div>
         <div className="text-xs" style={{ color: '#888' }}>© 2026 All Rights Reserved</div>
       </footer>

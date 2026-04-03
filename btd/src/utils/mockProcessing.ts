@@ -224,7 +224,7 @@ export const downloadReport = (
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>NeuroScan AI — Brain Scan Report</title>
+      <title>TumorTrace — Brain Scan Report</title>
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
       <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -239,7 +239,7 @@ export const downloadReport = (
         <div style="display:flex; align-items:center; gap:12px;">
           <div style="width:44px; height:44px; background:#0d0d0d; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px;">🧠</div>
           <div>
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800;">NeuroScan AI</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800;">TumorTrace</div>
             <div style="font-size:11px; color:#888; margin-top:2px;">Brain Tumor Detection Report</div>
           </div>
         </div>
@@ -324,7 +324,7 @@ export const downloadReport = (
 
       <!-- Footer -->
       <div style="padding-top:16px; border-top:1px solid #e0e0d8; display:flex; justify-content:space-between; align-items:center;">
-        <div style="font-size:11px; color:#888;">NeuroScan AI — For informational purposes only. Not a substitute for professional medical advice.</div>
+        <div style="font-size:11px; color:#888;">TumorTrace — For informational purposes only. Not a substitute for professional medical advice.</div>
         <div style="font-size:11px; color:#888;">© 2026 All Rights Reserved</div>
       </div>
 

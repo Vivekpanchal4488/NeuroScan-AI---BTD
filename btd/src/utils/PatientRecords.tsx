@@ -55,7 +55,7 @@ const generatePDF = (patients: PatientRecord[], doctorName: string) => {
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>Patient Records — NeuroScan AI</title>
+      <title>Patient Records — TumorTrace</title>
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
       <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,7 +72,7 @@ const generatePDF = (patients: PatientRecord[], doctorName: string) => {
         <div style="display:flex; align-items:center; gap: 12px;">
           <div style="width:40px; height:40px; background:#0d0d0d; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px;">🧠</div>
           <div>
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; font-weight:800;">NeuroScan AI</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; font-weight:800;">TumorTrace</div>
             <div style="font-size:11px; color:#888;">Patient Records Report</div>
           </div>
         </div>
@@ -112,7 +112,7 @@ const generatePDF = (patients: PatientRecord[], doctorName: string) => {
 
       <!-- Footer -->
       <div style="margin-top:24px; padding-top:16px; border-top:1px solid #e0e0d8; display:flex; justify-content:space-between; align-items:center;">
-        <div style="font-size:11px; color:#888;">NeuroScan AI — For medical use only. Results should be reviewed by a qualified physician.</div>
+        <div style="font-size:11px; color:#888;">TumorTrace — For medical use only. Results should be reviewed by a qualified physician.</div>
         <div style="font-size:11px; color:#888;">© 2026 All Rights Reserved</div>
       </div>
 
@@ -190,7 +190,7 @@ const PatientRecords: React.FC<PatientRecordsProps> = ({ onBack }) => {
           </div>
           <div>
             <div className="text-2xl font-extrabold leading-tight" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-              NeuroScan AI
+              TumorTrace
             </div>
             <div className="text-xs" style={{ color: '#888' }}>Patient Records</div>
           </div>
@@ -460,7 +460,7 @@ const PatientRecords: React.FC<PatientRecordsProps> = ({ onBack }) => {
       {/* FOOTER */}
       <footer className="flex items-center justify-between px-10 py-5 border-t mt-8" style={{ borderColor: '#e0e0d8', background: '#f9f9f5' }}>
         <div className="flex items-center gap-2 font-bold text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0d0d0d' }}>
-          <Brain className="h-4 w-4" /> NeuroScan AI — Patient Records
+          <Brain className="h-4 w-4" /> TumorTrace — Patient Records
         </div>
         <div className="text-xs" style={{ color: '#888' }}>© 2026 All Rights Reserved</div>
       </footer>
